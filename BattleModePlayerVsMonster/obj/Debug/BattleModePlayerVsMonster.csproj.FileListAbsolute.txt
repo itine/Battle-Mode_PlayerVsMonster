@@ -3,3 +3,10 @@ C:\Users\alexe\OneDrive\Documents\Visual Studio 2015\Projects\BattleModePlayerVs
 C:\Users\alexe\OneDrive\Documents\Visual Studio 2015\Projects\BattleModePlayerVsMonster\BattleModePlayerVsMonster\obj\Debug\BattleModePlayerVsMonster.Form1.resources
 C:\Users\alexe\OneDrive\Documents\Visual Studio 2015\Projects\BattleModePlayerVsMonster\BattleModePlayerVsMonster\obj\Debug\BattleModePlayerVsMonster.Properties.Resources.resources
 C:\Users\alexe\OneDrive\Documents\Visual Studio 2015\Projects\BattleModePlayerVsMonster\BattleModePlayerVsMonster\obj\Debug\BattleModePlayerVsMonster.csproj.GenerateResource.Cache
+C:\Users\alexe\OneDrive\Documents\Visual Studio 2015\Projects\BattleModePlayerVsMonster\BattleModePlayerVsMonster\bin\Debug\BattleModePlayerVsMonster.exe
+C:\Users\alexe\OneDrive\Documents\Visual Studio 2015\Projects\BattleModePlayerVsMonster\BattleModePlayerVsMonster\bin\Debug\BattleModePlayerVsMonster.pdb
+C:\Users\alexe\OneDrive\Documents\Visual Studio 2015\Projects\BattleModePlayerVsMonster\BattleModePlayerVsMonster\bin\Debug\EntityFramework.dll
+C:\Users\alexe\OneDrive\Documents\Visual Studio 2015\Projects\BattleModePlayerVsMonster\BattleModePlayerVsMonster\bin\Debug\EntityFramework.xml
+C:\Users\alexe\OneDrive\Documents\Visual Studio 2015\Projects\BattleModePlayerVsMonster\BattleModePlayerVsMonster\bin\Debug\ru\EntityFramework.resources.dll
+C:\Users\alexe\OneDrive\Documents\Visual Studio 2015\Projects\BattleModePlayerVsMonster\BattleModePlayerVsMonster\obj\Debug\BattleModePlayerVsMonster.exe
+C:\Users\alexe\OneDrive\Documents\Visual Studio 2015\Projects\BattleModePlayerVsMonster\BattleModePlayerVsMonster\obj\Debug\BattleModePlayerVsMonster.pdb

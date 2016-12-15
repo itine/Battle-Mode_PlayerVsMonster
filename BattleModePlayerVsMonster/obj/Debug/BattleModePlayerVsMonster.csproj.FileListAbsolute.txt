@@ -1,0 +1,5 @@
+c:\users\alexe\onedrive\documents\visual studio 2015\Projects\BattleModePlayerVsMonster\BattleModePlayerVsMonster\bin\Debug\BattleModePlayerVsMonster.exe.config
+C:\Users\alexe\OneDrive\Documents\Visual Studio 2015\Projects\BattleModePlayerVsMonster\BattleModePlayerVsMonster\obj\Debug\BattleModePlayerVsMonster.csprojResolveAssemblyReference.cache
+C:\Users\alexe\OneDrive\Documents\Visual Studio 2015\Projects\BattleModePlayerVsMonster\BattleModePlayerVsMonster\obj\Debug\BattleModePlayerVsMonster.Form1.resources
+C:\Users\alexe\OneDrive\Documents\Visual Studio 2015\Projects\BattleModePlayerVsMonster\BattleModePlayerVsMonster\obj\Debug\BattleModePlayerVsMonster.Properties.Resources.resources
+C:\Users\alexe\OneDrive\Documents\Visual Studio 2015\Projects\BattleModePlayerVsMonster\BattleModePlayerVsMonster\obj\Debug\BattleModePlayerVsMonster.csproj.GenerateResource.Cache

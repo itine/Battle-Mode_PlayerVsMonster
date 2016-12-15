@@ -12,18 +12,18 @@ namespace BattleModePlayerVsMonster.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class units
+    public partial class Units
     {
         public int idUnit { get; set; }
         public int attack { get; set; }
         public int hp { get; set; }
         public int defence { get; set; }
         public int speed { get; set; }
-        public string unitName { get; set; }
-        public Nullable<int> currentLeftBox { get; set; }
-        public Nullable<int> currentRightBox { get; set; }
-        public Nullable<double> monstersRemainingOnLeft { get; set; }
-        public Nullable<double> monstersRemainingOnRight { get; set; }
+        //public string unitName { get; set; }
+        //public Nullable<int> currentLeftBox { get; set; }
+        //public Nullable<int> currentRightBox { get; set; }
+        //public Nullable<double> monstersRemainingOnLeft { get; set; }
+        //public Nullable<double> monstersRemainingOnRight { get; set; }
         public string classOfMonster { get; set; }
         public Nullable<int> monsterSize { get; set; }
         public Nullable<int> minDamage { get; set; }

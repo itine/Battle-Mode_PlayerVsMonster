@@ -13,13 +13,102 @@ namespace BattleModePlayerVsMonster
 {
     public partial class Form1 : Form
     {
+        int playerLevel = -1;
+
         public Form1()
         {
             InitializeComponent();
         }
-        
+        Player player;
         GameEntities db = new GameEntities();
         private static int monster = -1;
+
+        
+
+        private void button30_Click(object sender, EventArgs e)
+        {
+            monster = 13;
+            pictureBox1.BackgroundImage = button30.BackgroundImage;
+        }
+
+        private void button29_Click(object sender, EventArgs e)
+        {
+            monster = 14;
+            pictureBox1.BackgroundImage = button29.BackgroundImage;
+        }
+
+
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            player = new Player();
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox1.Checked)
+            {
+                panel3.Visible = true;
+            }
+            else
+            {
+                panel3.Visible = false;
+            }
+        }
+
+        private void nextStepBtn_Click(object sender, EventArgs e)
+        {
+            if (radioButton1.Checked)
+            {
+
+            }
+            else if (radioButton2.Checked)
+            {
+
+            }
+            else if (radioButton3.Checked)
+            {
+
+            }
+            else
+               return;
+        }
+
+        //set stats
+        private void textBox7_TextChanged(object sender, EventArgs e)
+        {
+            player.PlayerLevel = Int32.Parse(textBox7.Text);
+        }
+
+        private void textBox4_TextChanged(object sender, EventArgs e)
+        {
+            player.Attack = Int32.Parse(textBox4.Text);
+        }
+
+        private void textBox5_TextChanged(object sender, EventArgs e)
+        {
+            player.Defence = Int32.Parse(textBox5.Text);
+        }
+
+        private void textBox6_TextChanged(object sender, EventArgs e)
+        {
+            player.SpellPower = Int32.Parse(textBox6.Text);
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            player.HPBottleQuantity = Int32.Parse(textBox1.Text);
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+            player.MPBottleQuantity = Int32.Parse(textBox2.Text);
+        }
+
+        private void textBox3_TextChanged(object sender, EventArgs e)
+        {
+            player.DiamondQuantity = Int32.Parse(textBox3.Text);
+        }
 
         //монстры варвара
         private void button4_Click_1(object sender, EventArgs e)
@@ -94,19 +183,6 @@ namespace BattleModePlayerVsMonster
             monster = 12;
             pictureBox1.BackgroundImage = button31.BackgroundImage;
         }
-
-        private void button30_Click(object sender, EventArgs e)
-        {
-            monster = 13;
-            pictureBox1.BackgroundImage = button30.BackgroundImage;
-        }
-
-        private void button29_Click(object sender, EventArgs e)
-        {
-            monster = 14;
-            pictureBox1.BackgroundImage = button29.BackgroundImage;
-        }
-
 
         //монстры мага
         private void button11_Click(object sender, EventArgs e)
@@ -238,40 +314,6 @@ namespace BattleModePlayerVsMonster
             pictureBox1.BackgroundImage = button222.BackgroundImage;
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            playerHP.Maximum = 10;
-            playerHP.Value = 5;
-        }
-
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBox1.Checked)
-            {
-                panel3.Visible = true;
-            }
-            else
-            {
-                panel3.Visible = false;
-            }
-        }
-
-        private void nextStepBtn_Click(object sender, EventArgs e)
-        {
-            if (radioButton1.Checked)
-            {
-
-            }
-            else if (radioButton2.Checked)
-            {
-
-            }
-            else if (radioButton3.Checked)
-            {
-
-            }
-            else
-               return;
-        }
+       
     }
 }

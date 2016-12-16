@@ -25,6 +25,6 @@ namespace BattleModePlayerVsMonster.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public DbSet<units> units { get; set; }
+        public DbSet<Units> units { get; set; }
     }
 }

@@ -19,7 +19,6 @@ namespace BattleModePlayerVsMonster
         {
             InitializeComponent();
         }
-        Player player;
         GameEntities db = new GameEntities();
         private static int monster = -1;
 
@@ -41,7 +40,6 @@ namespace BattleModePlayerVsMonster
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            player = new Player();
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
@@ -77,37 +75,53 @@ namespace BattleModePlayerVsMonster
         //set stats
         private void textBox7_TextChanged(object sender, EventArgs e)
         {
-            player.PlayerLevel = Int32.Parse(textBox7.Text);
+            if (textBox7.Text == "")
+                return;
+            Player.PlayerLevel = Int32.Parse(textBox7.Text);
+            label8.Text = Player.CalculateHPorMP().ToString();
+            label9.Text = Player.CalculateHPorMP().ToString();
         }
 
         private void textBox4_TextChanged(object sender, EventArgs e)
         {
-            player.Attack = Int32.Parse(textBox4.Text);
+            if (textBox4.Text == "")
+                return;
+            Player.Attack = Int32.Parse(textBox4.Text);
         }
 
         private void textBox5_TextChanged(object sender, EventArgs e)
         {
-            player.Defence = Int32.Parse(textBox5.Text);
+            if (textBox5.Text == "")
+                return;
+            Player.Defence = Int32.Parse(textBox5.Text);
         }
 
         private void textBox6_TextChanged(object sender, EventArgs e)
         {
-            player.SpellPower = Int32.Parse(textBox6.Text);
+            if (textBox6.Text == "")
+                return;
+            Player.SpellPower = Int32.Parse(textBox6.Text);
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            player.HPBottleQuantity = Int32.Parse(textBox1.Text);
+            if (textBox1.Text == "")
+                return;
+            Player.HPBottleQuantity = Int32.Parse(textBox1.Text);
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
-            player.MPBottleQuantity = Int32.Parse(textBox2.Text);
+            if (textBox2.Text == "")
+                return;
+            Player.MPBottleQuantity = Int32.Parse(textBox2.Text);
         }
 
         private void textBox3_TextChanged(object sender, EventArgs e)
         {
-            player.DiamondQuantity = Int32.Parse(textBox3.Text);
+            if (textBox3.Text == "")
+                return;
+            Player.DiamondQuantity = Int32.Parse(textBox3.Text);
         }
 
         //монстры варвара

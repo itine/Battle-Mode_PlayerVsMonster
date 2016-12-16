@@ -8,19 +8,24 @@ namespace BattleModePlayerVsMonster
 {
     public class Player
     {
-        public int HP { get; set; }
-        public int MP { get; set; }
-        public int Attack { get; set; }
-        public int SpellPower { get; set; }
-        public int DiamondQuantity { get; set; }
-        public int HPBottleQuantity { get; set; }
-        public int MPBottleQuantity { get; set; }
-        public int PlayerLevel { get; set; }
-        public int Defence { get; set; }
+        public static int HP { get; set; }
+        public static int MP { get; set; }
+        public static int Attack { get; set; }
+        public static int SpellPower { get; set; }
+        public static int DiamondQuantity { get; set; }
+        public static int HPBottleQuantity { get; set; }
+        public static int MPBottleQuantity { get; set; }
+        public static int PlayerLevel { get; set; }
+        public static int Defence { get; set; }
 
-        public static int CalculateHP(int level)
+        public static int CalculateHPorMP()
         {
-            
+            int local = 100;
+            for (int i = 1; i <= PlayerLevel; i++)
+            {
+                local = local + 10;
+            }
+            return local;
         }
     }
 }

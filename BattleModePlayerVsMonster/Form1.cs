@@ -21,22 +21,63 @@ namespace BattleModePlayerVsMonster
         }
         GameEntities db = new GameEntities();
         private static int monster = -1;
+        public static int step = 1;
+        public static double damage = 0;
+        int parityCount = 0;
 
+        int monsterAttack = 0;
+        int monsterAverageDamage = 0;
+        int monsterDefence = 0;
+        int monsterMinDamage = 0;
+        int monsterMaxDamage = 0;
+        int currentHPOfMonster = 0;
+        double monstersRemaning = 0;
+        double remainingHPOfMonster = 0;
+
+        int currentHPOfPlayer = 0;
+        double remainingHPOfPlayer = 0;
         
+        double coefficientForLeft = 1.0;
+        double coefficientForRight = 1.0;
+        int luckForLeft = 0;
+        int luckForRight = 0;
+        int moraleForLeft = 0;
+        int moraleForRight = 0;
+        bool flagForLeft = false;
+        bool flagForRight = false;
+        int coeffOfTotalDamageForLeft = 0;
+        int coeffOfTotalDamageForRight = 0;
 
-        private void button30_Click(object sender, EventArgs e)
+
+        private Units GetUnitById(int id)
         {
-            monster = 13;
-            pictureBox1.BackgroundImage = button30.BackgroundImage;
+            Units unit = (from a in db.units
+                          where a.idUnit == id
+                          select a).Single();
+            return unit;
         }
 
-        private void button29_Click(object sender, EventArgs e)
+        private bool CalculateLuck(int luck)
         {
-            monster = 14;
-            pictureBox1.BackgroundImage = button29.BackgroundImage;
+            Random rand = new Random();
+            int local = rand.Next(1, 11);
+            if (luck >= local)
+                return true;
+            return false;
         }
 
-
+        //private int CalculateChanceOfDoubleDamage(int Morale)
+        //{
+        //    if (leftLabel.BackColor == Color.Gold)
+        //        return 0;
+        //    Random rand = new Random();
+        //    int local = rand.Next(1, 11);
+        //    if (Morale >= local)
+        //    {
+        //        return 2;
+        //    }
+        //    return 1;
+        //}
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -56,9 +97,28 @@ namespace BattleModePlayerVsMonster
 
         private void nextStepBtn_Click(object sender, EventArgs e)
         {
+            int minDamage = 9999999;
+            int maxDamage = -1;
+            Random random;
+            int monsterAttack = GetUnitById(monster).attack;
+            int leftMonsterHP = GetUnitById(monster).hp;
+            int monsterMaxDamage = GetUnitById(monster).maxDamage.GetValueOrDefault();
+            int monsterDefence = GetUnitById(monster).defence;
+            int currentHPOfMonster = GetUnitById(monster).hp;
+            double remainingHP = currentHPOfMonster * Int32.Parse(textBox8.Text);
+            int monsterAverageDamage = -1;
+            if (CalculateLuck(luckForLeft))
+                monsterAverageDamage = monsterMaxDamage;
+            else
+            {
+                random = new Random();
+                int monsterMinDamage = GetUnitById(monster).minDamage.GetValueOrDefault();
+                int leftMonsterAverageDamage = random.Next(monsterMinDamage, monsterMaxDamage + 1);
+            }
+
             if (radioButton1.Checked)
             {
-
+                
             }
             else if (radioButton2.Checked)
             {
@@ -196,6 +256,18 @@ namespace BattleModePlayerVsMonster
         {
             monster = 12;
             pictureBox1.BackgroundImage = button31.BackgroundImage;
+        }
+
+        private void button30_Click(object sender, EventArgs e)
+        {
+            monster = 13;
+            pictureBox1.BackgroundImage = button30.BackgroundImage;
+        }
+
+        private void button29_Click(object sender, EventArgs e)
+        {
+            monster = 14;
+            pictureBox1.BackgroundImage = button29.BackgroundImage;
         }
 
         //монстры мага

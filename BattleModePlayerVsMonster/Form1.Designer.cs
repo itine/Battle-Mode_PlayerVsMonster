@@ -107,6 +107,12 @@
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.textBox9 = new System.Windows.Forms.TextBox();
+            this.textBox10 = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -945,7 +951,7 @@
             // 
             // textBox7
             // 
-            this.textBox7.Location = new System.Drawing.Point(41, 372);
+            this.textBox7.Location = new System.Drawing.Point(39, 372);
             this.textBox7.Name = "textBox7";
             this.textBox7.Size = new System.Drawing.Size(39, 20);
             this.textBox7.TabIndex = 107;
@@ -994,11 +1000,69 @@
             this.label11.TabIndex = 113;
             this.label11.Text = "Урон монстра";
             // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label12.Location = new System.Drawing.Point(85, 350);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(31, 12);
+            this.label12.TabIndex = 115;
+            this.label12.Text = "Удача";
+            // 
+            // textBox9
+            // 
+            this.textBox9.Location = new System.Drawing.Point(79, 372);
+            this.textBox9.Name = "textBox9";
+            this.textBox9.Size = new System.Drawing.Size(39, 20);
+            this.textBox9.TabIndex = 114;
+            // 
+            // textBox10
+            // 
+            this.textBox10.Location = new System.Drawing.Point(119, 372);
+            this.textBox10.Name = "textBox10";
+            this.textBox10.Size = new System.Drawing.Size(39, 20);
+            this.textBox10.TabIndex = 116;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label13.Location = new System.Drawing.Point(118, 350);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(40, 12);
+            this.label13.TabIndex = 117;
+            this.label13.Text = "Мораль";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(220, 131);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(13, 13);
+            this.label14.TabIndex = 118;
+            this.label14.Text = "  ";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(968, 131);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(10, 13);
+            this.label16.TabIndex = 119;
+            this.label16.Text = " ";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1362, 741);
+            this.Controls.Add(this.label16);
+            this.Controls.Add(this.label14);
+            this.Controls.Add(this.label13);
+            this.Controls.Add(this.textBox10);
+            this.Controls.Add(this.label12);
+            this.Controls.Add(this.textBox9);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.label9);
@@ -1133,6 +1197,12 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.TextBox textBox9;
+        private System.Windows.Forms.TextBox textBox10;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label16;
     }
 }
 

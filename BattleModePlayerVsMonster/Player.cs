@@ -17,6 +17,8 @@ namespace BattleModePlayerVsMonster
         public static int MPBottleQuantity { get; set; }
         public static int PlayerLevel { get; set; }
         public static int Defence { get; set; }
+        public static int Morale { get; set; }
+        public static int Luck { get; set; }
 
         public static int CalculateHPorMP()
         {
@@ -26,6 +28,17 @@ namespace BattleModePlayerVsMonster
                 local = local + 10;
             }
             return local;
+        }
+
+        public static int GetMinDamage()
+        {
+            double value = (double) PlayerLevel - PlayerLevel / 10 * 2;
+            return (int) Math.Ceiling(value);
+        }
+        public static int GetMaxDamage()
+        {
+            double value = (double)PlayerLevel + PlayerLevel / 10 * 2;
+            return (int)Math.Ceiling(value);
         }
     }
 }

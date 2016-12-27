@@ -8,8 +8,8 @@ namespace BattleModePlayerVsMonster
 {
     public class Player
     {
-        public static int HP { get; set; }
-        public static int MP { get; set; }
+        public static double HP { get; set; }
+        public static double MP { get; set; }
         public static int Attack { get; set; }
         public static int SpellPower { get; set; }
         public static int DiamondQuantity { get; set; }
@@ -39,6 +39,11 @@ namespace BattleModePlayerVsMonster
         {
             double value = (double)PlayerLevel + PlayerLevel / 10 * 2;
             return (int)Math.Floor(value);
+        }
+        public static int GetAverageDamage()
+        {
+            Random rand = new Random();
+            return rand.Next(GetMinDamage(), GetMaxDamage() + 1);
         }
     }
 }

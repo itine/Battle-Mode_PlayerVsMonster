@@ -113,6 +113,7 @@
             this.label13 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -684,7 +685,7 @@
             this.monsterHP.BackColor = System.Drawing.Color.Red;
             this.monsterHP.Location = new System.Drawing.Point(1180, 12);
             this.monsterHP.Name = "monsterHP";
-            this.monsterHP.Size = new System.Drawing.Size(170, 23);
+            this.monsterHP.Size = new System.Drawing.Size(170, 33);
             this.monsterHP.TabIndex = 84;
             // 
             // nextStepBtn
@@ -704,6 +705,7 @@
             this.pictureBox1.Size = new System.Drawing.Size(57, 69);
             this.pictureBox1.TabIndex = 87;
             this.pictureBox1.TabStop = false;
+            this.pictureBox1.BackgroundImageChanged += new System.EventHandler(this.pictureBox1_BackgroundImageChanged);
             // 
             // pictureBox2
             // 
@@ -963,6 +965,7 @@
             this.textBox8.Name = "textBox8";
             this.textBox8.Size = new System.Drawing.Size(23, 20);
             this.textBox8.TabIndex = 109;
+            this.textBox8.TextChanged += new System.EventHandler(this.textBox8_TextChanged);
             // 
             // label8
             // 
@@ -1052,11 +1055,21 @@
             this.label16.TabIndex = 119;
             this.label16.Text = " ";
             // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(1302, 22);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(10, 13);
+            this.label21.TabIndex = 120;
+            this.label21.Text = " ";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1362, 741);
+            this.Controls.Add(this.label21);
             this.Controls.Add(this.label16);
             this.Controls.Add(this.label14);
             this.Controls.Add(this.label13);
@@ -1203,6 +1216,7 @@
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label label21;
     }
 }
 

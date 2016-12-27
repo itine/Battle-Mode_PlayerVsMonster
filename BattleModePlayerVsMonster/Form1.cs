@@ -36,7 +36,10 @@ namespace BattleModePlayerVsMonster
 
         int currentHPOfPlayer = 0;
         double remainingHPOfPlayer = 0;
-        
+
+        int playerMinDamage = 9999999;
+        int playerMaxDamage = -1;
+
         double coefficientForLeft = 1.0;
         double coefficientForRight = 1.0;
         int luckForLeft = 0;
@@ -49,9 +52,9 @@ namespace BattleModePlayerVsMonster
         int coeffOfTotalDamageForRight = 0;
 
 
-        private Units GetUnitById(int id)
+        private units GetUnitById(int id)
         {
-            Units unit = (from a in db.units
+            units unit = (from a in db.units
                           where a.idUnit == id
                           select a).Single();
             return unit;
@@ -97,25 +100,6 @@ namespace BattleModePlayerVsMonster
 
         private void nextStepBtn_Click(object sender, EventArgs e)
         {
-            int minDamage = 9999999;
-            int maxDamage = -1;
-            Random random;
-            int monsterAttack = GetUnitById(monster).attack;
-            int leftMonsterHP = GetUnitById(monster).hp;
-            int monsterMaxDamage = GetUnitById(monster).maxDamage.GetValueOrDefault();
-            int monsterDefence = GetUnitById(monster).defence;
-            int currentHPOfMonster = GetUnitById(monster).hp;
-            double remainingHP = currentHPOfMonster * Int32.Parse(textBox8.Text);
-            int monsterAverageDamage = -1;
-            if (CalculateLuck(luckForLeft))
-                monsterAverageDamage = monsterMaxDamage;
-            else
-            {
-                random = new Random();
-                int monsterMinDamage = GetUnitById(monster).minDamage.GetValueOrDefault();
-                int leftMonsterAverageDamage = random.Next(monsterMinDamage, monsterMaxDamage + 1);
-            }
-
             if (radioButton1.Checked)
             {
                 
@@ -138,8 +122,13 @@ namespace BattleModePlayerVsMonster
             if (textBox7.Text == "")
                 return;
             Player.PlayerLevel = Int32.Parse(textBox7.Text);
-            label8.Text = Player.CalculateHPorMP().ToString();
-            label9.Text = Player.CalculateHPorMP().ToString();
+            int hp_mp = Player.CalculateHPorMP();
+            label8.Text = hp_mp.ToString();
+            label9.Text = hp_mp.ToString();
+            playerHP.Maximum = hp_mp;
+            playerHP.Value = hp_mp;
+            playerMP.Maximum = hp_mp;
+            playerMP.Value = hp_mp;
         }
 
         private void textBox4_TextChanged(object sender, EventArgs e)
@@ -400,6 +389,26 @@ namespace BattleModePlayerVsMonster
             pictureBox1.BackgroundImage = button222.BackgroundImage;
         }
 
-       
+        private void textBox8_TextChanged(object sender, EventArgs e)
+        {
+            if (textBox8.Text == "")
+                return;
+            currentHPOfMonster = GetUnitById(monster).hp;
+            remainingHPOfMonster = currentHPOfMonster * Int32.Parse(textBox8.Text);
+            monsterHP.Maximum = (int)remainingHPOfMonster;
+            monsterHP.Value = (int)Math.Ceiling(remainingHPOfMonster);
+            label21.Text = Math.Ceiling(remainingHPOfMonster).ToString();
+        }
+
+        private void pictureBox1_BackgroundImageChanged(object sender, EventArgs e)
+        {
+            Random random;
+            monsterAttack = GetUnitById(monster).attack;
+            monsterDefence = GetUnitById(monster).defence;
+            monsterMaxDamage = GetUnitById(monster).maxDamage.GetValueOrDefault();
+            monsterMinDamage = GetUnitById(monster).minDamage.GetValueOrDefault();
+            random = new Random();
+            monsterAverageDamage = random.Next(monsterMinDamage, monsterMaxDamage + 1);
+            }
+        }
     }
-}

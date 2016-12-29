@@ -27,6 +27,8 @@ namespace BattleModePlayerVsMonster
             {
                 local = local + 10;
             }
+            HP = local;
+            MP = local;
             return local;
         }
 

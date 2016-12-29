@@ -107,6 +107,13 @@ namespace BattleModePlayerVsMonster
 
         private void nextStepBtn_Click(object sender, EventArgs e)
         {
+            Random random;
+            monsterAttack = GetUnitById(monster).attack;
+            monsterDefence = GetUnitById(monster).defence;
+            monsterMaxDamage = GetUnitById(monster).maxDamage.GetValueOrDefault();
+            monsterMinDamage = GetUnitById(monster).minDamage.GetValueOrDefault();
+            random = new Random();
+            monsterAverageDamage = random.Next(monsterMinDamage, monsterMaxDamage + 1);
             //Game battle
             if (parityCount == 1)
             //ход игрока
@@ -123,6 +130,7 @@ namespace BattleModePlayerVsMonster
                     UpdateQuantityOfMonster(GetUnitById(monster).idUnit, monstersRemaning);
                     monsterHP.Value = (int)Math.Ceiling(remainingHPOfMonster);
                     label21.Text = remainingHPOfMonster.ToString();
+                    textBox8.Visible = false;
                     parityCount = 0;
                     if (monstersRemaning > 0)
                     {
@@ -137,6 +145,7 @@ namespace BattleModePlayerVsMonster
                         {
                             playerHP.Value = 0;
                             label16.Text += "\n игрок убит";
+                            textBox8.Visible = true;
                         }
                         else
                         {
@@ -145,7 +154,8 @@ namespace BattleModePlayerVsMonster
                     }
                     else
                     {
-                        label21.Text += "\n " + GetUnitById(monster).unitName + " убит";
+                        label14.Text += "\n " + GetUnitById(monster).unitName + " убит";
+                        textBox8.Visible = true;
                     }
 
                 }
@@ -163,7 +173,45 @@ namespace BattleModePlayerVsMonster
             else
             //ход монстра
             {
-
+                if (monsterAttack >= Player.Defence)
+                    damage = monsterAverageDamage * (1 + (monsterAttack - Player.Defence) * 0.05);
+                else
+                    damage = monsterAverageDamage / (1 + (Player.Defence - monsterAttack) * 0.05);
+                Player.HP -= damage;
+                label16.Text += "\n" + step + ") " + GetUnitById(monster).unitName + " ударил \nна " + Math.Round(damage, 2).ToString() + " урона ";
+                
+                playerHP.Value = (int)Math.Ceiling(Player.HP);
+                label21.Text = Player.HP.ToString();
+                parityCount = 1;
+                if (playerHP.Value > 0)
+                {
+                    if (Player.Attack >= monsterDefence)
+                        damage = Player.GetAverageDamage() * (1 + (Player.Attack - monsterDefence) * 0.05);
+                    else
+                        damage = Player.GetAverageDamage() / (1 + (monsterDefence - Player.Attack) * 0.05);
+                    remainingHPOfMonster -= damage;
+                    label14.Text += "\n" + step + ") Игрок ударил \nна " + Math.Round(damage, 2).ToString() + " урона " + GetUnitById(monster).unitName;
+                    monstersRemaning = remainingHPOfMonster / GetUnitById(monster).hp;
+                    UpdateQuantityOfMonster(GetUnitById(monster).idUnit, monstersRemaning);
+                    monsterHP.Value = (int)Math.Ceiling(remainingHPOfMonster);
+                    label21.Text = remainingHPOfMonster.ToString();
+                    textBox8.Visible = false;
+                    if (monstersRemaning <= 0)
+                    {
+                        monsterHP.Value = 0;
+                        label14.Text += "\n "+ GetUnitById(monster).unitName + " убит";
+                        textBox8.Visible = true;
+                    }
+                    else
+                    {
+                        monsterHP.Value = (int)Math.Ceiling(remainingHPOfMonster);
+                    }
+                }
+                else
+                {
+                    label16.Text += "\nигрок убит";
+                    textBox8.Visible = true;
+                }
             }
                 
         }
@@ -177,6 +225,7 @@ namespace BattleModePlayerVsMonster
             int hp_mp = Player.CalculateHPorMP();
             label8.Text = hp_mp.ToString();
             label9.Text = hp_mp.ToString();
+            
             playerHP.Maximum = hp_mp;
             playerHP.Value = hp_mp;
             playerMP.Maximum = hp_mp;

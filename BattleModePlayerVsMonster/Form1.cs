@@ -24,7 +24,7 @@ namespace BattleModePlayerVsMonster
         public static int step = 1;
         public static double damage = 0;
         int parityCount = 1;
-
+        int countOfAutodamage = 1;
         int monsterAttack = 0;
         int monsterAverageDamage = 0;
         int monsterDefence = 0;
@@ -107,6 +107,17 @@ namespace BattleModePlayerVsMonster
 
         private void nextStepBtn_Click(object sender, EventArgs e)
         {
+            if (step % 17 == 0)
+            {
+                label14.Text = "";
+                label16.Text = "";
+            }
+            if (playerHP.Value <= 0 || monsterHP.Value <= 0)
+            {
+                MessageBox.Show("Бой завершен");
+                textBox8.Visible = true;
+                return;
+            }
             Random random;
             monsterAttack = GetUnitById(monster).attack;
             monsterDefence = GetUnitById(monster).defence;
@@ -118,72 +129,8 @@ namespace BattleModePlayerVsMonster
             if (parityCount == 1)
             //ход игрока
             {
+                //обычная атака
                 if (radioButton1.Checked)
-                {
-                    if (Player.Attack >= monsterDefence)
-                        damage =  Player.GetAverageDamage() * (1 + (Player.Attack - monsterDefence) * 0.05);
-                    else
-                        damage =  Player.GetAverageDamage() / (1 + (monsterDefence - Player.Attack) * 0.05);
-                    remainingHPOfMonster -= damage;
-                    label14.Text += "\n" + step + ") Игрок ударил \nна " + Math.Round(damage, 2).ToString() + " урона " + GetUnitById(monster).unitName;
-                    monstersRemaning = remainingHPOfMonster / GetUnitById(monster).hp;
-                    UpdateQuantityOfMonster(GetUnitById(monster).idUnit, monstersRemaning);
-                    monsterHP.Value = (int)Math.Ceiling(remainingHPOfMonster);
-                    label21.Text = remainingHPOfMonster.ToString();
-                    textBox8.Visible = false;
-                    parityCount = 0;
-                    if (monstersRemaning > 0)
-                    {
-                        if (monsterAttack >= Player.Defence)
-                            damage = monsterAverageDamage * (1 + (monsterAttack - Player.Defence) * 0.05);
-                        else
-                            damage =  monsterAverageDamage / (1 + (Player.Defence - monsterAttack) * 0.05);
-                        Player.HP -= damage;
-                        label16.Text += "\n" + step + ") " + GetUnitById(monster).unitName + " ответил \nна " + Math.Round(damage, 2).ToString() + " урона";
-                        
-                        if (Player.HP <= 0)
-                        {
-                            playerHP.Value = 0;
-                            label16.Text += "\n игрок убит";
-                            textBox8.Visible = true;
-                        }
-                        else
-                        {
-                            playerHP.Value = (int)Math.Ceiling(Player.HP);
-                        }
-                    }
-                    else
-                    {
-                        label14.Text += "\n " + GetUnitById(monster).unitName + " убит";
-                        textBox8.Visible = true;
-                    }
-
-                }
-                else if (radioButton2.Checked)
-                {
-
-                }
-                else if (radioButton3.Checked)
-                {
-
-                }
-                else
-                    return;
-            }
-            else
-            //ход монстра
-            {
-                if (monsterAttack >= Player.Defence)
-                    damage = monsterAverageDamage * (1 + (monsterAttack - Player.Defence) * 0.05);
-                else
-                    damage = monsterAverageDamage / (1 + (Player.Defence - monsterAttack) * 0.05);
-                Player.HP -= damage;
-                label16.Text += "\n" + step + ") " + GetUnitById(monster).unitName + " ударил \nна " + Math.Round(damage, 2).ToString() + " урона ";
-                
-                playerHP.Value = (int)Math.Ceiling(Player.HP);
-                label21.Text = Player.HP.ToString();
-                parityCount = 1;
-                if (playerHP.Value > 0)
                 {
                     if (Player.Attack >= monsterDefence)
                         damage = Player.GetAverageDamage() * (1 + (Player.Attack - monsterDefence) * 0.05);
@@ -193,14 +140,269 @@ namespace BattleModePlayerVsMonster
                     label14.Text += "\n" + step + ") Игрок ударил \nна " + Math.Round(damage, 2).ToString() + " урона " + GetUnitById(monster).unitName;
                     monstersRemaning = remainingHPOfMonster / GetUnitById(monster).hp;
                     UpdateQuantityOfMonster(GetUnitById(monster).idUnit, monstersRemaning);
-                    monsterHP.Value = (int)Math.Ceiling(remainingHPOfMonster);
+                    label21.Text = remainingHPOfMonster.ToString();
+                    textBox8.Visible = false;
+                    parityCount = 0;
+                    if (monstersRemaning > 0)
+                    {
+                        monsterHP.Value = (int)Math.Ceiling(remainingHPOfMonster);
+                        if (monsterAttack >= Player.Defence)
+                            damage = monsterAverageDamage * (1 + (monsterAttack - Player.Defence) * 0.05);
+                        else
+                            damage = monsterAverageDamage / (1 + (Player.Defence - monsterAttack) * 0.05);
+                        Player.HP -= damage;
+                        label16.Text += "\n" + step + ") " + GetUnitById(monster).unitName + " ответил \nна " + Math.Round(damage, 2).ToString() + " урона";
+
+                        if (Player.HP <= 0)
+                        {
+                            playerHP.Value = 0;
+                            label16.Text += "\n игрок убит";
+                            textBox8.Visible = true;
+                        }
+                        else
+                        {
+                            playerHP.Value = (int)Math.Ceiling(Player.HP);
+                            Player.HP = playerHP.Value;
+                        }
+                    }
+                    else
+                    {
+                        label14.Text += "\n " + GetUnitById(monster).unitName + " убит";
+                        MessageBox.Show("Бой завершен!");
+                        textBox8.Visible = true;
+                    }
+
+                }
+                //доп. атака
+                else if (radioButton2.Checked)
+                {
+                    double twenteenPercent = playerMP.Maximum * 0.2;
+                    if (twenteenPercent > playerMP.Value)
+                    {
+                        MessageBox.Show("Закончилась мана");
+                        return;
+                    }
+                    playerMP.Value = playerMP.Value - (int)twenteenPercent;
+                    Player.MP = playerMP.Value;
+                    if (Player.Attack >= monsterDefence)
+                        damage = Player.GetAverageDamage() * (1 + (Player.Attack + Player.SpellPower - monsterDefence) * 0.05);
+                    else
+                        damage = Player.GetAverageDamage() / (1 + (monsterDefence - (Player.Attack + Player.SpellPower)) * 0.05);
+                    remainingHPOfMonster -= damage;
+                    label14.Text += "\n" + step + ") Игрок ударил \nна " + Math.Round(damage, 2).ToString() + " урона " + GetUnitById(monster).unitName;
+                    monstersRemaning = remainingHPOfMonster / GetUnitById(monster).hp;
+                    UpdateQuantityOfMonster(GetUnitById(monster).idUnit, monstersRemaning);
+                    label21.Text = remainingHPOfMonster.ToString();
+                    textBox8.Visible = false;
+                    parityCount = 0;
+                    if (monstersRemaning > 0)
+                    {
+                        monsterHP.Value = (int)Math.Ceiling(remainingHPOfMonster);
+                        if (monsterAttack >= Player.Defence)
+                            damage = monsterAverageDamage * (1 + (monsterAttack - Player.Defence) * 0.05);
+                        else
+                            damage = monsterAverageDamage / (1 + (Player.Defence - monsterAttack) * 0.05);
+                        Player.HP -= damage;
+                        label16.Text += "\n" + step + ") " + GetUnitById(monster).unitName + " ответил \nна " + Math.Round(damage, 2).ToString() + " урона";
+
+                        if (Player.HP <= 0)
+                        {
+                            playerHP.Value = 0;
+                            label16.Text += "\n игрок убит";
+                            textBox8.Visible = true;
+                        }
+                        else
+                        {
+                            playerHP.Value = (int)Math.Ceiling(Player.HP);
+                            Player.HP = playerHP.Value;
+                        }
+                    }
+                    else
+                    {
+                        label14.Text += "\n " + GetUnitById(monster).unitName + " убит";
+                        MessageBox.Show("Бой завершен!");
+                        textBox8.Visible = true;
+                    }
+                }
+                //автобой
+                else if (radioButton3.Checked)
+                {
+                    double twenteenPercent = playerMP.Maximum * 0.2;
+                    if (countOfAutodamage <= 5)
+                    {
+                        countOfAutodamage++;
+                        if (!radioButton1.Checked)
+                        {
+                            if (checkBox2.Checked && !radioButton1.Checked && !radioButton2.Checked)
+                            {
+                                if (Player.Attack >= monsterDefence)
+                                    damage = Player.GetAverageDamage() * (1 + (Player.Attack + Player.SpellPower - monsterDefence) * 0.05);
+                                else
+                                    damage = Player.GetAverageDamage() / (1 + (monsterDefence - (Player.Attack + Player.SpellPower)) * 0.05);
+                                if (twenteenPercent > playerMP.Value)
+                                {
+                                    if (checkBox4.Checked && !radioButton1.Checked && !radioButton2.Checked)
+                                    {
+                                        playerMP.Value = playerMP.Maximum;
+                                        Player.MPBottleQuantity = Int32.Parse(textBox2.Text) - 1;
+                                        textBox2.Text = Player.MPBottleQuantity.ToString();
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show("Закончилась мана");
+                                        return;
+                                    }
+                                }
+                                else
+                                    playerMP.Value = playerMP.Value - (int)twenteenPercent;
+                                Player.MP = playerMP.Value;
+                            }
+                            else
+                            {
+                                if (Player.Attack >= monsterDefence)
+                                    damage = Player.GetAverageDamage() * (1 + (Player.Attack - monsterDefence) * 0.05);
+                                else
+                                    damage = Player.GetAverageDamage() / (1 + (monsterDefence - Player.Attack) * 0.05);
+                            }
+                        }
+
+                        remainingHPOfMonster -= damage;
+                        label14.Text += "\n" + step + ") Игрок ударил \nна " + Math.Round(damage, 2).ToString() + " урона " + GetUnitById(monster).unitName;
+                        monstersRemaning = remainingHPOfMonster / GetUnitById(monster).hp;
+                        UpdateQuantityOfMonster(GetUnitById(monster).idUnit, monstersRemaning);
+                        label21.Text = remainingHPOfMonster.ToString();
+                        textBox8.Visible = false;
+                        parityCount = 0;
+                        if (monstersRemaning > 0)
+                        {
+                            monsterHP.Value = (int)Math.Ceiling(remainingHPOfMonster);
+                            if (monsterAttack >= Player.Defence)
+                                damage = monsterAverageDamage * (1 + (monsterAttack - Player.Defence) * 0.05);
+                            else
+                                damage = monsterAverageDamage / (1 + (Player.Defence - monsterAttack) * 0.05);
+                            if (checkBox3.Checked && !radioButton1.Checked && !radioButton2.Checked)
+                            {
+                                if (damage >= playerHP.Value)
+                                {
+                                    playerHP.Value = playerHP.Maximum;
+                                    Player.HP = playerHP.Value;
+                                    Player.HPBottleQuantity = Int32.Parse(textBox1.Text) - 1;
+                                    textBox1.Text = Player.HPBottleQuantity.ToString();
+                                }
+                            }
+                            Player.HP -= damage;
+                            label16.Text += "\n" + step + ") " + GetUnitById(monster).unitName + " ответил \nна " + Math.Round(damage, 2).ToString() + " урона";
+
+                            if (Player.HP <= 0)
+                            {
+                                playerHP.Value = 0;
+                                Player.HP = playerHP.Value;
+                                label16.Text += "\n игрок убит";
+                                textBox8.Visible = true;
+                            }
+                            else
+                            {
+                                playerHP.Value = (int)Math.Ceiling(Player.HP);
+                                Player.HP = playerHP.Value;
+                            }
+                        }
+                        else
+                        {
+                            label14.Text += "\n " + GetUnitById(monster).unitName + " убит";
+                            MessageBox.Show("Бой завершен!");
+                            textBox8.Visible = true;
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Автобой запрещен, продолжайте бить обычными ударами, либо завершите бой");
+                        return;
+                    }
+                }
+                else
+                    return;
+            }
+            else
+            //ход монстра
+            {
+                double twenteenPercent = playerMP.Maximum * 0.2;
+                if (monsterAttack >= Player.Defence)
+                    damage = monsterAverageDamage * (1 + (monsterAttack - Player.Defence) * 0.05);
+                else
+                    damage = monsterAverageDamage / (1 + (Player.Defence - monsterAttack) * 0.05);
+                Player.HP -= damage;
+                label16.Text += "\n" + step + ") " + GetUnitById(monster).unitName + " ударил \nна " + Math.Round(damage, 2).ToString() + " урона ";
+                if (Player.HP <= 0)
+                {
+                    MessageBox.Show("Бой завершен!");
+                    textBox8.Visible = true;
+                    return;
+                }
+                playerHP.Value = (int)Math.Ceiling(Player.HP);
+                Player.HP = playerHP.Value;
+                label21.Text = Player.HP.ToString();
+                parityCount = 1;
+                if (playerHP.Value > 0)
+                {
+                    if (checkBox2.Checked && !radioButton1.Checked && !radioButton2.Checked)
+                    {
+                        if (Player.Attack >= monsterDefence)
+                            damage = Player.GetAverageDamage() * (1 + (Player.Attack + Player.SpellPower - monsterDefence) * 0.05);
+                        else
+                            damage = Player.GetAverageDamage() / (1 + (monsterDefence - (Player.Attack + Player.SpellPower)) * 0.05);
+                        if (twenteenPercent > playerMP.Value)
+                        {
+                            if (checkBox4.Checked && !radioButton1.Checked && !radioButton2.Checked)
+                            {
+                                playerMP.Value = playerMP.Maximum;
+                                Player.MPBottleQuantity = Int32.Parse(textBox2.Text) - 1;
+                                textBox2.Text = Player.MPBottleQuantity.ToString();
+                            }
+                            else
+                            {
+                                MessageBox.Show("Закончилась мана");
+                                return;
+                            }
+                        }
+                        else
+                            playerMP.Value = playerMP.Value - (int)twenteenPercent;
+                        Player.MP = playerMP.Value;
+                    }
+                    else
+                    {
+                        if (Player.Attack >= monsterDefence)
+                            damage = Player.GetAverageDamage() * (1 + (Player.Attack - monsterDefence) * 0.05);
+                        else
+                            damage = Player.GetAverageDamage() / (1 + (monsterDefence - Player.Attack) * 0.05);
+                    }
+                    if (damage > playerHP.Value)
+                    {
+                        if (checkBox3.Checked && !radioButton1.Checked && !radioButton2.Checked)
+                        {
+                            playerHP.Value = playerHP.Maximum;
+                            Player.HPBottleQuantity = Int32.Parse(textBox1.Text) - 1;
+                            textBox1.Text = Player.HPBottleQuantity.ToString();
+                            Player.HP = playerHP.Value;
+                        }
+                        else
+                        {
+                            MessageBox.Show("Закончилось здоровье");
+                            textBox8.Visible = true;
+                            return;
+                        }
+                    }
+                    remainingHPOfMonster -= damage;
+                    label14.Text += "\n" + step + ") Игрок ответил \nна " + Math.Round(damage, 2).ToString() + " урона " + GetUnitById(monster).unitName;
+                    monstersRemaning = remainingHPOfMonster / GetUnitById(monster).hp;
+                    UpdateQuantityOfMonster(GetUnitById(monster).idUnit, monstersRemaning);
                     label21.Text = remainingHPOfMonster.ToString();
                     textBox8.Visible = false;
                     if (monstersRemaning <= 0)
                     {
                         monsterHP.Value = 0;
-                        label14.Text += "\n "+ GetUnitById(monster).unitName + " убит";
+                        label14.Text += "\n " + GetUnitById(monster).unitName + " убит";
                         textBox8.Visible = true;
+                        MessageBox.Show("Бой завершен!");
                     }
                     else
                     {
@@ -213,7 +415,7 @@ namespace BattleModePlayerVsMonster
                     textBox8.Visible = true;
                 }
             }
-                
+            step++;
         }
 
         //set stats
@@ -225,7 +427,7 @@ namespace BattleModePlayerVsMonster
             int hp_mp = Player.CalculateHPorMP();
             label8.Text = hp_mp.ToString();
             label9.Text = hp_mp.ToString();
-            
+
             playerHP.Maximum = hp_mp;
             playerHP.Value = hp_mp;
             playerMP.Maximum = hp_mp;
@@ -493,13 +695,16 @@ namespace BattleModePlayerVsMonster
 
         private void textBox8_TextChanged(object sender, EventArgs e)
         {
-            if (textBox8.Text == "")
-                return;
-            currentHPOfMonster = GetUnitById(monster).hp;
-            remainingHPOfMonster = currentHPOfMonster * Int32.Parse(textBox8.Text);
-            monsterHP.Maximum = (int)remainingHPOfMonster;
-            monsterHP.Value = (int)Math.Ceiling(remainingHPOfMonster);
-            label21.Text = Math.Ceiling(remainingHPOfMonster).ToString();
+            if (pictureBox1.BackgroundImage != null)
+            {
+                if (textBox8.Text == "")
+                    return;
+                currentHPOfMonster = GetUnitById(monster).hp;
+                remainingHPOfMonster = currentHPOfMonster * Int32.Parse(textBox8.Text);
+                monsterHP.Maximum = (int)remainingHPOfMonster;
+                monsterHP.Value = (int)Math.Ceiling(remainingHPOfMonster);
+                label21.Text = Math.Ceiling(remainingHPOfMonster).ToString();
+            }
         }
 
         private void pictureBox1_BackgroundImageChanged(object sender, EventArgs e)
@@ -511,6 +716,101 @@ namespace BattleModePlayerVsMonster
             monsterMinDamage = GetUnitById(monster).minDamage.GetValueOrDefault();
             random = new Random();
             monsterAverageDamage = random.Next(monsterMinDamage, monsterMaxDamage + 1);
+        }
+
+        private void pictureBox3_Click(object sender, EventArgs e)
+        {
+            int countOfBottles = Int32.Parse(textBox1.Text);
+            textBox1.Text = (countOfBottles - 1).ToString();
+            int maxHP = playerHP.Maximum;
+            Player.HP = maxHP;
+            playerHP.Value = maxHP;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (pictureBox1.BackgroundImage != null)
+            {
+                MessageBox.Show(" " + GetUnitById(monster).unitName
+                + "\n Defence: " + GetUnitById(monster).defence
+                + "\n HP: " + GetUnitById(monster).hp
+                + "\n maxDamage: " + GetUnitById(monster).maxDamage
+                + "\n minDamage: " + GetUnitById(monster).minDamage
+                + "\n Attack: " + GetUnitById(monster).attack
+                + "\n averageDamage: " + GetUnitById(monster).averageDamage
+                );
             }
         }
+
+        private void textBox8_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (Char.IsNumber(e.KeyChar) | (Char.IsPunctuation(e.KeyChar))) return;
+            else
+                e.Handled = true;
+        }
+
+        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (Char.IsNumber(e.KeyChar) | (Char.IsPunctuation(e.KeyChar))) return;
+            else
+                e.Handled = true;
+        }
+
+        private void textBox2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (Char.IsNumber(e.KeyChar) | (Char.IsPunctuation(e.KeyChar))) return;
+            else
+                e.Handled = true;
+        }
+
+        private void textBox3_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (Char.IsNumber(e.KeyChar) | (Char.IsPunctuation(e.KeyChar))) return;
+            else
+                e.Handled = true;
+        }
+
+        private void textBox4_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (Char.IsNumber(e.KeyChar) | (Char.IsPunctuation(e.KeyChar))) return;
+            else
+                e.Handled = true;
+        }
+
+        private void textBox5_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (Char.IsNumber(e.KeyChar) | (Char.IsPunctuation(e.KeyChar))) return;
+            else
+                e.Handled = true;
+        }
+
+        private void textBox6_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (Char.IsNumber(e.KeyChar) | (Char.IsPunctuation(e.KeyChar))) return;
+            else
+                e.Handled = true;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            monster = -1;
+            pictureBox1.BackgroundImage = null;
+        }
+
+        private void pictureBox4_Click(object sender, EventArgs e)
+        {
+            int countOfBottles = Int32.Parse(textBox2.Text);
+            textBox2.Text = (countOfBottles - 1).ToString();
+            int maxMP = playerMP.Maximum;
+            Player.MP = maxMP;
+            playerMP.Value = maxMP;
+        }
+
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+            textBox8.Text = "";
+            step = 1;
+            countOfAutodamage = 1;
+        }
     }
+}

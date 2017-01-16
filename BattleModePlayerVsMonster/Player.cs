@@ -43,9 +43,13 @@ namespace BattleModePlayerVsMonster
             return (int)Math.Floor(value);
         }
         public static int GetAverageDamage()
-        {
+        {            
             Random rand = new Random();
-            return rand.Next(GetMinDamage(), GetMaxDamage() + 1);
+            int local = rand.Next(1, 11);
+            if (rand.Next(1,11) >= local)
+                return GetMaxDamage();
+            else
+                return rand.Next(GetMinDamage(), GetMaxDamage() + 1);
         }
     }
 }

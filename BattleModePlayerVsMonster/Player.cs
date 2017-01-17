@@ -34,12 +34,12 @@ namespace BattleModePlayerVsMonster
 
         public static int GetMinDamage()
         {
-            double value = (double) PlayerLevel - PlayerLevel / 10 * 2;
+            double value = (double) (PlayerLevel + 10)*0.8;
             return (int) Math.Ceiling(value);
         }
         public static int GetMaxDamage()
         {
-            double value = (double)PlayerLevel + PlayerLevel / 10 * 2;
+            double value = (double)(PlayerLevel + 10) * 1.2;
             return (int)Math.Floor(value);
         }
         public static int GetAverageDamage()

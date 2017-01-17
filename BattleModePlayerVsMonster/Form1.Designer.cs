@@ -88,14 +88,10 @@
             this.radioButton3 = new System.Windows.Forms.RadioButton();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
-            this.pictureBox5 = new System.Windows.Forms.PictureBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
             this.panel3 = new System.Windows.Forms.Panel();
             this.checkBox4 = new System.Windows.Forms.CheckBox();
             this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.textBox6 = new System.Windows.Forms.TextBox();
@@ -107,10 +103,6 @@
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.textBox9 = new System.Windows.Forms.TextBox();
-            this.textBox10 = new System.Windows.Forms.TextBox();
-            this.label13 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.label21 = new System.Windows.Forms.Label();
@@ -122,7 +114,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -712,7 +703,7 @@
             // pictureBox2
             // 
             this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(12, 81);
+            this.pictureBox2.Location = new System.Drawing.Point(58, 81);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(79, 115);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -722,7 +713,7 @@
             // pictureBox3
             // 
             this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
-            this.pictureBox3.Location = new System.Drawing.Point(39, 212);
+            this.pictureBox3.Location = new System.Drawing.Point(58, 208);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(39, 39);
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -733,7 +724,7 @@
             // pictureBox4
             // 
             this.pictureBox4.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox4.Image")));
-            this.pictureBox4.Location = new System.Drawing.Point(79, 212);
+            this.pictureBox4.Location = new System.Drawing.Point(98, 208);
             this.pictureBox4.Name = "pictureBox4";
             this.pictureBox4.Size = new System.Drawing.Size(39, 39);
             this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -752,6 +743,7 @@
             this.radioButton1.TabStop = true;
             this.radioButton1.Text = "Физическая атака";
             this.radioButton1.UseVisualStyleBackColor = true;
+            this.radioButton1.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
             // 
             // radioButton2
             // 
@@ -764,6 +756,7 @@
             this.radioButton2.TabStop = true;
             this.radioButton2.Text = "Усиленная атака";
             this.radioButton2.UseVisualStyleBackColor = true;
+            this.radioButton2.CheckedChanged += new System.EventHandler(this.radioButton2_CheckedChanged);
             // 
             // panel2
             // 
@@ -772,7 +765,7 @@
             this.panel2.Controls.Add(this.radioButton3);
             this.panel2.Controls.Add(this.radioButton1);
             this.panel2.Controls.Add(this.radioButton2);
-            this.panel2.Location = new System.Drawing.Point(21, 419);
+            this.panel2.Location = new System.Drawing.Point(23, 370);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(161, 100);
             this.panel2.TabIndex = 95;
@@ -805,7 +798,7 @@
             // 
             this.textBox1.BackColor = System.Drawing.SystemColors.InfoText;
             this.textBox1.ForeColor = System.Drawing.SystemColors.Info;
-            this.textBox1.Location = new System.Drawing.Point(39, 257);
+            this.textBox1.Location = new System.Drawing.Point(58, 253);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(39, 23);
@@ -819,7 +812,7 @@
             // 
             this.textBox2.BackColor = System.Drawing.SystemColors.InfoText;
             this.textBox2.ForeColor = System.Drawing.SystemColors.Info;
-            this.textBox2.Location = new System.Drawing.Point(79, 257);
+            this.textBox2.Location = new System.Drawing.Point(98, 253);
             this.textBox2.Multiline = true;
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(39, 23);
@@ -829,36 +822,12 @@
             this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             this.textBox2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox2_KeyPress);
             // 
-            // pictureBox5
-            // 
-            this.pictureBox5.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox5.Image")));
-            this.pictureBox5.Location = new System.Drawing.Point(119, 212);
-            this.pictureBox5.Name = "pictureBox5";
-            this.pictureBox5.Size = new System.Drawing.Size(39, 39);
-            this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox5.TabIndex = 98;
-            this.pictureBox5.TabStop = false;
-            // 
-            // textBox3
-            // 
-            this.textBox3.BackColor = System.Drawing.SystemColors.InfoText;
-            this.textBox3.ForeColor = System.Drawing.SystemColors.Info;
-            this.textBox3.Location = new System.Drawing.Point(119, 257);
-            this.textBox3.Multiline = true;
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(39, 23);
-            this.textBox3.TabIndex = 99;
-            this.textBox3.Text = "0";
-            this.textBox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.textBox3.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
-            this.textBox3.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox3_KeyPress);
-            // 
             // panel3
             // 
             this.panel3.Controls.Add(this.checkBox4);
             this.panel3.Controls.Add(this.checkBox3);
             this.panel3.Controls.Add(this.checkBox2);
-            this.panel3.Location = new System.Drawing.Point(21, 522);
+            this.panel3.Location = new System.Drawing.Point(23, 473);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(161, 73);
             this.panel3.TabIndex = 100;
@@ -894,30 +863,11 @@
             this.checkBox2.Text = "Использовать ус. атаку";
             this.checkBox2.UseVisualStyleBackColor = true;
             // 
-            // textBox4
-            // 
-            this.textBox4.Location = new System.Drawing.Point(39, 315);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(39, 20);
-            this.textBox4.TabIndex = 101;
-            this.textBox4.TextChanged += new System.EventHandler(this.textBox4_TextChanged);
-            this.textBox4.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox4_KeyPress);
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label4.Location = new System.Drawing.Point(39, 293);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(31, 12);
-            this.label4.TabIndex = 102;
-            this.label4.Text = "Атака";
-            // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label5.Location = new System.Drawing.Point(78, 293);
+            this.label5.Location = new System.Drawing.Point(82, 301);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(38, 12);
             this.label5.TabIndex = 103;
@@ -925,7 +875,7 @@
             // 
             // textBox5
             // 
-            this.textBox5.Location = new System.Drawing.Point(79, 315);
+            this.textBox5.Location = new System.Drawing.Point(84, 323);
             this.textBox5.Name = "textBox5";
             this.textBox5.Size = new System.Drawing.Size(39, 20);
             this.textBox5.TabIndex = 104;
@@ -934,7 +884,7 @@
             // 
             // textBox6
             // 
-            this.textBox6.Location = new System.Drawing.Point(119, 315);
+            this.textBox6.Location = new System.Drawing.Point(129, 323);
             this.textBox6.Name = "textBox6";
             this.textBox6.Size = new System.Drawing.Size(39, 20);
             this.textBox6.TabIndex = 105;
@@ -945,7 +895,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label6.Location = new System.Drawing.Point(128, 293);
+            this.label6.Location = new System.Drawing.Point(139, 301);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(17, 12);
             this.label6.TabIndex = 106;
@@ -955,7 +905,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label7.Location = new System.Drawing.Point(41, 350);
+            this.label7.Location = new System.Drawing.Point(39, 301);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(41, 12);
             this.label7.TabIndex = 108;
@@ -963,7 +913,7 @@
             // 
             // textBox7
             // 
-            this.textBox7.Location = new System.Drawing.Point(39, 372);
+            this.textBox7.Location = new System.Drawing.Point(41, 323);
             this.textBox7.Name = "textBox7";
             this.textBox7.Size = new System.Drawing.Size(39, 20);
             this.textBox7.TabIndex = 107;
@@ -1013,40 +963,6 @@
             this.label11.Size = new System.Drawing.Size(79, 13);
             this.label11.TabIndex = 113;
             this.label11.Text = "Урон монстра";
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label12.Location = new System.Drawing.Point(85, 350);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(31, 12);
-            this.label12.TabIndex = 115;
-            this.label12.Text = "Удача";
-            // 
-            // textBox9
-            // 
-            this.textBox9.Location = new System.Drawing.Point(79, 372);
-            this.textBox9.Name = "textBox9";
-            this.textBox9.Size = new System.Drawing.Size(39, 20);
-            this.textBox9.TabIndex = 114;
-            // 
-            // textBox10
-            // 
-            this.textBox10.Location = new System.Drawing.Point(119, 372);
-            this.textBox10.Name = "textBox10";
-            this.textBox10.Size = new System.Drawing.Size(39, 20);
-            this.textBox10.TabIndex = 116;
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label13.Location = new System.Drawing.Point(118, 350);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(40, 12);
-            this.label13.TabIndex = 117;
-            this.label13.Text = "Мораль";
             // 
             // label14
             // 
@@ -1105,10 +1021,6 @@
             this.Controls.Add(this.label21);
             this.Controls.Add(this.label16);
             this.Controls.Add(this.label14);
-            this.Controls.Add(this.label13);
-            this.Controls.Add(this.textBox10);
-            this.Controls.Add(this.label12);
-            this.Controls.Add(this.textBox9);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.label9);
@@ -1120,11 +1032,7 @@
             this.Controls.Add(this.textBox6);
             this.Controls.Add(this.textBox5);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.textBox4);
             this.Controls.Add(this.panel3);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.pictureBox5);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.panel2);
@@ -1155,7 +1063,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.ResumeLayout(false);
@@ -1224,14 +1131,10 @@
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.PictureBox pictureBox5;
-        private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.CheckBox checkBox2;
         private System.Windows.Forms.CheckBox checkBox3;
         private System.Windows.Forms.CheckBox checkBox4;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox textBox5;
         private System.Windows.Forms.TextBox textBox6;
@@ -1243,10 +1146,6 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.TextBox textBox9;
-        private System.Windows.Forms.TextBox textBox10;
-        private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label21;

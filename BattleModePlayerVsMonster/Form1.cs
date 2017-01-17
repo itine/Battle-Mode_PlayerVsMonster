@@ -13,7 +13,6 @@ namespace BattleModePlayerVsMonster
 {
     public partial class Form1 : Form
     {
-        int playerLevel = -1;
 
         public Form1()
         {
@@ -33,24 +32,7 @@ namespace BattleModePlayerVsMonster
         int currentHPOfMonster = 0;
         double monstersRemaning = 0;
         double remainingHPOfMonster = 0;
-
-        int currentHPOfPlayer = 0;
-        double remainingHPOfPlayer = 0;
-
-        int playerMinDamage = 9999999;
-        int playerMaxDamage = -1;
-
-        double coefficientForLeft = 1.0;
-        double coefficientForRight = 1.0;
-        int luckForLeft = 0;
-        int luckForRight = 0;
-        int moraleForLeft = 0;
-        int moraleForRight = 0;
-        bool flagForLeft = false;
-        bool flagForRight = false;
-        int coeffOfTotalDamageForLeft = 0;
-        int coeffOfTotalDamageForRight = 0;
-
+        
 
         private units GetUnitById(int id)
         {
@@ -220,6 +202,7 @@ namespace BattleModePlayerVsMonster
                     else
                     {
                         label14.Text += "\n " + GetUnitById(monster).unitName + " убит";
+                        monsterHP.Value = 0;
                         MessageBox.Show("Бой завершен!");
                         textBox8.Visible = true;
                     }
@@ -330,6 +313,22 @@ namespace BattleModePlayerVsMonster
                     damage = monsterAverageDamage * (1 + (monsterAttack - Player.Defence) * 0.05);
                 else
                     damage = monsterAverageDamage / (1 + (Player.Defence - monsterAttack) * 0.05);
+                if (damage > playerHP.Value)
+                {
+                    if (checkBox3.Checked && !radioButton1.Checked && !radioButton2.Checked)
+                    {
+                        playerHP.Value = playerHP.Maximum;
+                        Player.HPBottleQuantity = Int32.Parse(textBox1.Text) - 1;
+                        textBox1.Text = Player.HPBottleQuantity.ToString();
+                        Player.HP = playerHP.Value;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Закончилось здоровье");
+                        textBox8.Visible = true;
+                        return;
+                    }
+                }
                 Player.HP -= damage;
                 label16.Text += "\n" + step + ") " + GetUnitById(monster).unitName + " ударил \nна " + Math.Round(damage, 2).ToString() + " урона ";
                 if (Player.HP <= 0)
@@ -434,12 +433,7 @@ namespace BattleModePlayerVsMonster
             playerMP.Value = hp_mp;
         }
 
-        private void textBox4_TextChanged(object sender, EventArgs e)
-        {
-            if (textBox4.Text == "")
-                return;
-            Player.Attack = Int32.Parse(textBox4.Text);
-        }
+        
 
         private void textBox5_TextChanged(object sender, EventArgs e)
         {
@@ -469,12 +463,7 @@ namespace BattleModePlayerVsMonster
             Player.MPBottleQuantity = Int32.Parse(textBox2.Text);
         }
 
-        private void textBox3_TextChanged(object sender, EventArgs e)
-        {
-            if (textBox3.Text == "")
-                return;
-            Player.DiamondQuantity = Int32.Parse(textBox3.Text);
-        }
+       
 
         //монстры варвара
         private void button4_Click_1(object sender, EventArgs e)
@@ -809,8 +798,25 @@ namespace BattleModePlayerVsMonster
         private void button2_Click_1(object sender, EventArgs e)
         {
             textBox8.Text = "";
+            textBox8.Visible = true;
             step = 1;
             countOfAutodamage = 1;
+        }
+
+        private void radioButton2_CheckedChanged(object sender, EventArgs e)
+        {
+            checkBox1.Checked = false;
+            checkBox2.Checked = false;
+            checkBox3.Checked = false;
+            checkBox4.Checked = false;
+        }
+
+        private void radioButton1_CheckedChanged(object sender, EventArgs e)
+        {
+            checkBox1.Checked = false;
+            checkBox2.Checked = false;
+            checkBox3.Checked = false;
+            checkBox4.Checked = false;
         }
     }
 }

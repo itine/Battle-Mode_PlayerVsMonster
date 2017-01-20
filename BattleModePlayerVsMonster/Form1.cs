@@ -818,5 +818,19 @@ namespace BattleModePlayerVsMonster
             checkBox3.Checked = false;
             checkBox4.Checked = false;
         }
+
+        private void textBox3_TextChanged(object sender, EventArgs e)
+        {
+            if (textBox3.Text == "")
+                return;
+            Player.Attack = Int32.Parse(textBox3.Text);
+        }
+
+        private void textBox3_KeyPress_1(object sender, KeyPressEventArgs e)
+        {
+            if (Char.IsNumber(e.KeyChar) | (Char.IsPunctuation(e.KeyChar))) return;
+            else
+                e.Handled = true;
+        }
     }
 }

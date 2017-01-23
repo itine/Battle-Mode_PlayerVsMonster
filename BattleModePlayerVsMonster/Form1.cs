@@ -101,7 +101,11 @@ namespace BattleModePlayerVsMonster
                 return;
             }
             Random random;
-            monsterAttack = GetUnitById(monster).attack;
+            monstersRemaning = remainingHPOfMonster / GetUnitById(monster).hp;
+            if (monstersRemaning > 1)
+                monsterAttack = GetUnitById(monster).attack * (int)Math.Floor(monstersRemaning);
+            else
+                monsterAttack = GetUnitById(monster).attack ;
             monsterDefence = GetUnitById(monster).defence;
             monsterMaxDamage = GetUnitById(monster).maxDamage.GetValueOrDefault();
             monsterMinDamage = GetUnitById(monster).minDamage.GetValueOrDefault();
@@ -797,6 +801,8 @@ namespace BattleModePlayerVsMonster
 
         private void button2_Click_1(object sender, EventArgs e)
         {
+            label16.Text = "";
+            label14.Text = "";
             textBox8.Text = "";
             textBox8.Visible = true;
             step = 1;
@@ -827,6 +833,20 @@ namespace BattleModePlayerVsMonster
         }
 
         private void textBox3_KeyPress_1(object sender, KeyPressEventArgs e)
+        {
+            if (Char.IsNumber(e.KeyChar) | (Char.IsPunctuation(e.KeyChar))) return;
+            else
+                e.Handled = true;
+        }
+
+        private void textBox4_TextChanged(object sender, EventArgs e)
+        {
+            if (textBox4.Text == "")
+                return;
+            Player.AverageDamage = Int32.Parse(textBox4.Text);
+        }
+
+        private void textBox4_KeyPress_1(object sender, KeyPressEventArgs e)
         {
             if (Char.IsNumber(e.KeyChar) | (Char.IsPunctuation(e.KeyChar))) return;
             else

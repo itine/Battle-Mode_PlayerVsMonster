@@ -19,6 +19,7 @@ namespace BattleModePlayerVsMonster
         public static int Defence { get; set; }
         public static int Morale { get; set; }
         public static int Luck { get; set; }
+        public static int AverageDamage { get; set; }
 
         public static int CalculateHPorMP()
         {
@@ -34,22 +35,23 @@ namespace BattleModePlayerVsMonster
 
         public static int GetMinDamage()
         {
-            double value = (double) (PlayerLevel + 10)*0.8;
+            double value = (double) (AverageDamage + 20)*0.8;
             return (int) Math.Ceiling(value);
         }
         public static int GetMaxDamage()
         {
-            double value = (double)(PlayerLevel + 10) * 1.2;
+            double value = (double)(AverageDamage + 20) * 1.2;
             return (int)Math.Floor(value);
         }
         public static int GetAverageDamage()
-        {            
-            Random rand = new Random();
-            int local = rand.Next(1, 11);
-            if (rand.Next(1,11) >= local)
-                return GetMaxDamage();
-            else
-                return rand.Next(GetMinDamage(), GetMaxDamage() + 1);
+        {
+            return AverageDamage; 
+            //Random rand = new Random();
+            //int local = rand.Next(1, 11);
+            //if (rand.Next(1,11) >= local)
+            //    return GetMaxDamage();
+            //else
+            //    return rand.Next(GetMinDamage(), GetMaxDamage() + 1);
         }
     }
 }
